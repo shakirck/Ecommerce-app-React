@@ -1,9 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import CartItem from './CartItem';
 
 export class Cart extends Component {
   render() {
-    return <div>Cart</div>;
+    const { cart } = this.props;
+    return (
+      <div>
+        {cart.map((element) => {
+          return <CartItem cart={element} />;
+        })}
+      </div>
+    );
   }
 }
-export default connect()(Cart);
+function mapStateToProps({ cart, products }) {
+  console.log(cart);
+  return {
+    cart,
+    products,
+  };
+}
+export default connect(mapStateToProps)(Cart);

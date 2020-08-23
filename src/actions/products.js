@@ -1,4 +1,4 @@
-import { UPDATE_PRODUCTS } from './actionTypes';
+import { UPDATE_PRODUCTS, DELETE_PRODUCT_SUCCESS } from './actionTypes';
 import products from '../reducer/products';
 
 export function fetchProducts() {
@@ -13,7 +13,7 @@ export function fetchProducts() {
           dispatch(updateProducts(data.products));
         });
     } else {
-      console.log('Local storage', localStorage.getItem('products'));
+      // console.log('Local storage', localStorage.getItem('products'));
       dispatch(updateProducts(JSON.parse(localStorage.getItem('products'))));
     }
   };
@@ -32,18 +32,18 @@ export function editProducts(editedProduct) {
     const index = products.findIndex(
       (element) => element.id == editedProduct.editId
     );
-    console.log(products);
-    console.log(index);
 
     products[index] = {
+      ...products[index],
       id: editedProduct.editId,
       name: editedProduct.name,
       price: editedProduct.price,
       description: editedProduct.description,
-      ...products[index],
+      rating: editedProduct.rating,
     };
 
     localStorage.removeItem('products');
+    console.log(' CHANGING THE PRODUCT DETAILS ,', products[index]);
     localStorage.setItem('products', JSON.stringify(products));
     dispatch(fetchProducts());
   };
@@ -65,6 +65,13 @@ export function addNewProduct(product) {
     const newProducts = [...products, newProduct];
     console.log(newProducts);
     localStorage.setItem('products', JSON.stringify(newProducts));
+    dispatch(fetchProducts());
+  };
+}
+
+export function deleteProducts(products) {
+  return (dispatch) => {
+    localStorage.setItem('products', JSON.stringify(products));
     dispatch(fetchProducts());
   };
 }

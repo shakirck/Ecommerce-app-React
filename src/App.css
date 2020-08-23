@@ -23,3 +23,17 @@
   padding: 10px;
   margin-top: 5px;
 }
+.ProductItem div {
+  padding: 10px;
+}
+.rating-wrapper {
+  display: flex;
+}
+.rating-wrapper img {
+  width: 20px;
+}
+.CartItem {
+  background-color: cadetblue;
+  padding: 10px;
+  margin-top: 5px;
+}

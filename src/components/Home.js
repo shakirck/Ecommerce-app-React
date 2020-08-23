@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { ProductList } from '.';
-import products from '../reducer/products';
 
 export default class Home extends Component {
   render() {

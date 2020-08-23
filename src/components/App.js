@@ -6,6 +6,7 @@ import { fetchProducts } from '../actions/products';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Home, ProductDetails } from '.';
 import NewProduct from './NewProduct';
+import { Cart } from '.';
 
 export class App extends Component {
   componentDidMount() {
@@ -13,7 +14,7 @@ export class App extends Component {
   }
   render() {
     console.log(this.props, 'PROPS');
-    const { products } = this.props;
+    const { products, cart } = this.props;
     return (
       <div className="App">
         <BrowserRouter>
@@ -34,6 +35,7 @@ export class App extends Component {
               component={ProductDetails}
             />{' '}
             <Route exact={true} path="/newproduct" component={NewProduct} />
+            <Route exact={true} path="/cart" component={Cart} cart={cart} />
           </Switch>
         </BrowserRouter>
       </div>
@@ -41,9 +43,10 @@ export class App extends Component {
   }
 }
 
-function mapStateToProps({ products, product }) {
+function mapStateToProps({ products, product, cart }) {
   return {
     products,
+    cart,
   };
 }
 export default connect(mapStateToProps)(App);

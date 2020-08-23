@@ -1,8 +1,15 @@
-import { ADD_TO_CART } from './actionTypes';
+import { ADD_TO_CART, REMOVE_FROM_CART } from './actionTypes';
 
-export function addToCart(productId) {
+export function addToCart(product) {
   return {
     type: ADD_TO_CART,
-    productId,
+    product,
+  };
+}
+
+export function removeFromCart(product) {
+  return {
+    type: REMOVE_FROM_CART,
+    product,
   };
 }

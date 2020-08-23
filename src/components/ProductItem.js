@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import products from '../reducer/products';
-import { editProducts } from '../actions/products';
+import {
+  editProducts,
+  fetchProducts,
+  deleteProducts,
+} from '../actions/products';
 import { connect } from 'react-redux';
 import { ProductDetails } from '.';
-import { addToCart } from '../actions/cart';
+import { addToCart, removeFromCart } from '../actions/cart';
 
 export class ProductItem extends Component {
   constructor(props) {
@@ -19,15 +23,28 @@ export class ProductItem extends Component {
       description: product.description,
       price: product.price,
       editId: product.id,
+      rating: product.rating,
     };
   }
+  checkCart = (product) => {
+    let result = false;
+    const { cart } = this.props;
+    for (let item of cart) {
+      if (item.id === product.id) {
+        result = true;
+      }
+    }
+    return result;
+  };
   handleEdit = () => {
     this.setState({
       editmode: true,
     });
   };
   handleSave = () => {
+    console.log('clicked save');
     this.props.dispatch(editProducts(this.state));
+    console.log(this.state);
     this.setState({
       editmode: false,
       success: true,
@@ -40,12 +57,35 @@ export class ProductItem extends Component {
   };
   handleAddCart = () => {
     const { product } = this.props;
-    this.props.dispatch(addToCart(product.id));
+    this.props.dispatch(addToCart(product));
+  };
+  handleRemoveCart = () => {
+    this.props.dispatch(removeFromCart(this.props.product));
+  };
+
+  handleDelete = () => {
+    const { product } = this.props;
+    const products = JSON.parse(localStorage.getItem('products'));
+
+    const newProducts = products.filter((item) => item.id !== product.id);
+    console.log(newProducts);
+    this.props.dispatch(deleteProducts(newProducts));
   };
   render() {
-    console.log('PPPPPPPPPPROOOOOOOOOPS', this.props);
+    // console.log(this.state.name, this.state.description);
+    localStorage.setItem('cart', JSON.stringify(this.props.cart));
+
     const { product } = this.props;
     const { editmode, success, isInCart } = this.state;
+    const checkCartStatus = this.checkCart(product);
+
+    const ratingStar = [];
+    for (let i = 0; i < product.rating; i++) {
+      console.log(product.rating, product.name, '$%^&U*IOPOI*U&^T%');
+      ratingStar.push(
+        <img src="https://image.flaticon.com/icons/svg/616/616489.svg" />
+      );
+    }
     return (
       <div className="ProductItem">
         {success && <div>Product Edited</div>}
@@ -56,21 +96,25 @@ export class ProductItem extends Component {
               <img src={product.url} />
             </div>
             <div>name:{product.name}</div>
-            <div> Price:{product.price}</div>
+            <div> RS:{product.price}</div>
             <div>Description:{product.description}</div>
+            <div className="rating-wrapper"> Rating : {ratingStar}</div>
             <div>
               <button onClick={this.handleEdit}> Edit</button>{' '}
             </div>
-            {!isInCart && (
+            {!checkCartStatus && (
               <div>
                 {' '}
                 <button onClick={this.handleAddCart}> Add ToCart</button>
               </div>
             )}
-            {isInCart && (
+            {checkCartStatus && (
               <div>
                 {' '}
-                <button> Remove From Cart</button>
+                <button onClick={this.handleRemoveCart}>
+                  {' '}
+                  Remove From Cart
+                </button>
               </div>
             )}
           </div>
@@ -106,13 +150,23 @@ export class ProductItem extends Component {
               />
             </div>
             <div>
+              {' '}
+              rating:{' '}
+              <input
+                value={this.state.rating}
+                onChange={(e) => {
+                  this.handleChange('rating', e.target.value);
+                }}
+              />
+            </div>
+            <div>
               <button onClick={this.handleSave}> Save</button>{' '}
             </div>
           </div>
         )}
         <div>
           {' '}
-          <button>Delete</button>
+          <button onClick={this.handleDelete}>Delete</button>
         </div>
         <Link to={`/products/${product.id}`}>More Details</Link>
       </div>
