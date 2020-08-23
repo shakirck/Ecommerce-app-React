@@ -4,7 +4,8 @@ import '../App.css';
 import React, { Component } from 'react';
 import { fetchProducts } from '../actions/products';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Home } from '.';
+import { Home, ProductDetails } from '.';
+import NewProduct from './NewProduct';
 
 export class App extends Component {
   componentDidMount() {
@@ -27,6 +28,12 @@ export class App extends Component {
                 return <Home {...props} products={products} />;
               }}
             />
+            <Route
+              exact={true}
+              path="/products/:productId"
+              component={ProductDetails}
+            />{' '}
+            <Route exact={true} path="/newproduct" component={NewProduct} />
           </Switch>
         </BrowserRouter>
       </div>
@@ -34,7 +41,7 @@ export class App extends Component {
   }
 }
 
-function mapStateToProps({ products }) {
+function mapStateToProps({ products, product }) {
   return {
     products,
   };

@@ -1,4 +1,7 @@
-import { UPDATE_PRODUCTS } from '../actions/actionTypes';
+import {
+  UPDATE_PRODUCTS,
+  FETCH_PRODUCTS_DETAILS_SUCCESS,
+} from '../actions/actionTypes';
 
 export default function products(state = [], action) {
   switch (action.type) {

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { ProductItem } from '.';
+import { connect } from 'react-redux';
 
-export default class Products extends Component {
+export class Products extends Component {
   render() {
     const { products } = this.props;
     return (
@@ -9,9 +10,16 @@ export default class Products extends Component {
         {/* TODO: add products */}
 
         {products.map((item) => (
-          <ProductItem product={item} key={item.id} />
+          <ProductItem product={item} cart={this.props.cart} key={item.id} />
         ))}
       </div>
     );
   }
 }
+function mapStateToProps({ cart }) {
+  console.log(cart);
+  return {
+    cart,
+  };
+}
+export default connect(mapStateToProps)(Products);
