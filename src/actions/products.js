@@ -60,7 +60,7 @@ export function addNewProduct(product) {
       url: product.url,
       price: product.price,
 
-      id: lengthOfProducts + 1,
+      id: lengthOfProducts + 2,
     };
     const newProducts = [...products, newProduct];
     console.log(newProducts);

@@ -35,7 +35,14 @@ export class NewProduct extends Component {
     const { success } = this.state;
     return (
       <div className="NewProduct">
-        {success && <div>New Product added successfully</div>}
+        <div class="notification-box">
+          {success && (
+            <div className="notification">
+              <div>Product Added</div>
+              <img src="https://image.flaticon.com/icons/svg/190/190411.svg" />
+            </div>
+          )}
+        </div>
         <div>
           name:
           <input

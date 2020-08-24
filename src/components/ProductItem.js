@@ -88,41 +88,69 @@ export class ProductItem extends Component {
     }
     return (
       <div className="ProductItem">
-        {success && <div>Product Edited</div>}
+        <div class="notification-box">
+          {success && (
+            <div className="notification">
+              <div>Product Edited</div>
+              <img src="https://image.flaticon.com/icons/svg/190/190411.svg" />
+            </div>
+          )}
+        </div>
         {!editmode && (
-          <div>
-            <div>
-              {' '}
+          <div className="product-wrapper">
+            <div className="product-image-wrapper">
               <img src={product.url} />
             </div>
-            <div>name:{product.name}</div>
-            <div> RS:{product.price}</div>
-            <div>Description:{product.description}</div>
-            <div className="rating-wrapper"> Rating : {ratingStar}</div>
-            <div>
-              <button onClick={this.handleEdit}> Edit</button>{' '}
+            <div className="product-details-wrapper">
+              <div className="product-name-wrapper">{product.name}</div>
+              <div className="product-price-wrapper"> ₹{product.price}</div>
+              <div>
+                {product.description.substring(1, 39)}........
+                <Link to={`/products/${product.id}`}>More</Link>
+              </div>
+              <div className="product-rating-wrapper"> {ratingStar}</div>
+              {!checkCartStatus && (
+                <div>
+                  <button className="btn cart-btn" onClick={this.handleAddCart}>
+                    {' '}
+                    Add ToCart{' '}
+                    <img src="https://image.flaticon.com/icons/svg/613/613446.svg" />
+                  </button>
+                </div>
+              )}
+              {checkCartStatus && (
+                <div>
+                  <button
+                    className="btn cart-btn cart-remove"
+                    onClick={this.handleRemoveCart}
+                  >
+                    Remove From Cart
+                    <img src="https://image.flaticon.com/icons/svg/2568/2568244.svg" />
+                  </button>
+                </div>
+              )}
             </div>
-            {!checkCartStatus && (
+            <div class="btn-group">
+              <img
+                className="btn edit-btn"
+                onClick={this.handleEdit}
+                src="https://image.flaticon.com/icons/svg/535/535524.svg"
+              />
+
               <div>
-                {' '}
-                <button onClick={this.handleAddCart}> Add ToCart</button>
+                <img
+                  className="btn delete-btn"
+                  onClick={this.handleDelete}
+                  src="https://image.flaticon.com/icons/svg/1632/1632602.svg"
+                />
               </div>
-            )}
-            {checkCartStatus && (
-              <div>
-                {' '}
-                <button onClick={this.handleRemoveCart}>
-                  {' '}
-                  Remove From Cart
-                </button>
-              </div>
-            )}
+            </div>
           </div>
         )}
         {editmode && (
-          <div>
-            <div>
-              Name:{' '}
+          <div className="edit-product-wrapper">
+            <div className="edit-input">
+              Name:
               <input
                 value={this.state.name}
                 onChange={(e) => {
@@ -130,9 +158,8 @@ export class ProductItem extends Component {
                 }}
               />
             </div>
-            <div>
-              {' '}
-              Price:{' '}
+            <div className="edit-input">
+              Price:
               <input
                 value={this.state.price}
                 onChange={(e) => {
@@ -140,8 +167,8 @@ export class ProductItem extends Component {
                 }}
               />
             </div>
-            <div>
-              Description:{' '}
+            <div className="edit-input">
+              Description:
               <textarea
                 value={this.state.description}
                 onChange={(e) => {
@@ -149,9 +176,8 @@ export class ProductItem extends Component {
                 }}
               />
             </div>
-            <div>
-              {' '}
-              rating:{' '}
+            <div className="edit-input">
+              rating:
               <input
                 value={this.state.rating}
                 onChange={(e) => {
@@ -160,15 +186,12 @@ export class ProductItem extends Component {
               />
             </div>
             <div>
-              <button onClick={this.handleSave}> Save</button>{' '}
+              <button className="btn" onClick={this.handleSave}>
+                Save
+              </button>
             </div>
           </div>
         )}
-        <div>
-          {' '}
-          <button onClick={this.handleDelete}>Delete</button>
-        </div>
-        <Link to={`/products/${product.id}`}>More Details</Link>
       </div>
     );
   }

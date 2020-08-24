@@ -18,9 +18,8 @@ export class App extends Component {
     return (
       <div className="App">
         <BrowserRouter>
-          <div>
-            <Navbar />
-          </div>
+          <Navbar />
+
           <Switch>
             <Route
               exact={true}
