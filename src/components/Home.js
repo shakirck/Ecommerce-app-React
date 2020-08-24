@@ -20,14 +20,13 @@ export default class Home extends Component {
   };
 
   render() {
-    console.log('Props *** Home', this.props);
+    // console.log('Props *** Home', this.props);
     const { isSorted } = this.state;
     const { products } = this.props;
 
     return (
       <div className="Home">
-        <div>
-          {' '}
+        <div className="filter-wrapper">
           <button onClick={this.handleSort}>Sort By Price </button>{' '}
           {isSorted && <button onClick={this.handleCancelSort}>X</button>}
         </div>

@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 export class CartItem extends Component {
   render() {
     const { cart } = this.props;
-    console.log(cart);
+    // console.log(cart);
     return (
       <div className="CartItem">
         <div>

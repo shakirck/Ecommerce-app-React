@@ -31,7 +31,7 @@ export class NewProduct extends Component {
     });
   };
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     const { success } = this.state;
     return (
       <div className="NewProduct">

@@ -4,6 +4,7 @@
   overflow-x: hidden;
 }
 .Home {
+  margin-top: 50px;
 }
 .Navbar {
   display: flex;
@@ -30,6 +31,10 @@
 }
 .cart-icon-wrapper .cart-icon {
   display: flex;
+  width: 50px;
+}
+
+.cart-icon-wrapper .cart-icon img {
   width: 50px;
 }
 
@@ -171,7 +176,7 @@
   border: 3px solid transparent;
 }
 .edit-input input:focus {
-  border: 3px solid greenyellow;
+  border: 3px solid rgb(47, 255, 57);
 }
 .edit-input textarea {
   border: 3px solid transparent;

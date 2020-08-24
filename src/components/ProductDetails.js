@@ -7,15 +7,15 @@ export class ProductDetails extends Component {
   componentDidMount() {
     const { match } = this.props;
 
-    console.log('@!!!!!!!!!!!!', this.props);
+    // console.log('@!!!!!!!!!!!!', this.props);
     this.props.dispatch(fetchProductDetails(match.params.productId));
   }
   render() {
-    console.log('%$$$$$#####', this.props);
+    // console.log('%$$$$$#####', this.props);
     const { product } = this.props;
     const ratingStar = [];
     for (let i = 0; i < product.rating; i++) {
-      console.log(product.rating, product.name, '$%^&U*IOPOI*U&^T%');
+      // console.log(product.rating, product.name, '$%^&U*IOPOI*U&^T%');
       ratingStar.push(
         <img src="https://image.flaticon.com/icons/svg/616/616489.svg" />
       );
@@ -45,7 +45,7 @@ export class ProductDetails extends Component {
   }
 }
 function mapStateToProps(state) {
-  console.log('productDetails~~~~~~~~~~~~~~', state);
+  // console.log('productDetails~~~~~~~~~~~~~~', state);
   return {
     product: state.productDetails,
   };

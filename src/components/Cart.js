@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 export class Cart extends Component {
   render() {
     const { cart } = this.props;
-    console.log(cart.length);
+    // console.log(cart.length);
     return (
       <div className="Cart">
         {cart.length == 0 && (
@@ -27,7 +27,7 @@ export class Cart extends Component {
   }
 }
 function mapStateToProps({ cart, products }) {
-  console.log(cart);
+  // console.log(cart);
   return {
     cart,
     products,

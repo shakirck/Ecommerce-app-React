@@ -42,9 +42,9 @@ export class ProductItem extends Component {
     });
   };
   handleSave = () => {
-    console.log('clicked save');
+    // console.log('clicked save');
     this.props.dispatch(editProducts(this.state));
-    console.log(this.state);
+    // console.log(this.state);
     this.setState({
       editmode: false,
       success: true,
@@ -68,11 +68,11 @@ export class ProductItem extends Component {
     const products = JSON.parse(localStorage.getItem('products'));
 
     const newProducts = products.filter((item) => item.id !== product.id);
-    console.log(newProducts);
+    // console.log(newProducts);
     this.props.dispatch(deleteProducts(newProducts));
   };
   render() {
-    // console.log(this.state.name, this.state.description);
+    console.log(this.state.name, this.state.description);
     localStorage.setItem('cart', JSON.stringify(this.props.cart));
 
     const { product } = this.props;
@@ -81,7 +81,7 @@ export class ProductItem extends Component {
 
     const ratingStar = [];
     for (let i = 0; i < product.rating; i++) {
-      console.log(product.rating, product.name, '$%^&U*IOPOI*U&^T%');
+      // console.log(product.rating, product.name, '$%^&U*IOPOI*U&^T%');
       ratingStar.push(
         <img src="https://image.flaticon.com/icons/svg/616/616489.svg" />
       );

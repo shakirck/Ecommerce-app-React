@@ -13,7 +13,7 @@ export class App extends Component {
     this.props.dispatch(fetchProducts());
   }
   render() {
-    console.log(this.props, 'PROPS');
+    // console.log(this.props, 'PROPS');
     const { products, cart } = this.props;
     return (
       <div className="App">

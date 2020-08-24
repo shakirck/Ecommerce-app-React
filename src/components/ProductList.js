@@ -12,10 +12,10 @@ export class Products extends Component {
     };
   };
   render() {
-    console.log('proppppppppppppppppppps', this.props);
+    // console.log('proppppppppppppppppppps', this.props);
     const { products } = this.props;
     const { isSorted } = this.props;
-    console.log(isSorted, 'ISSORTED');
+    // console.log(isSorted, 'ISSORTED');
     if (isSorted) {
       products.sort(this.sortByProperty('price'));
     } else {
@@ -32,7 +32,7 @@ export class Products extends Component {
   }
 }
 function mapStateToProps({ cart }) {
-  console.log(cart);
+  // console.log(cart);
   return {
     cart,
   };
